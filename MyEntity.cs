@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Database; // This is my custom database dll for sqlite helper
+using veritabanıdll;
 using System.Data;
 using System.Reflection;
 
-namespace performORM.Entity
+namespace ConsoleApplication1.Entity
 {
     public class Entity<T>
     {
-        Database db;
+        veritabanı db;
         public List<T> ConvertToList<T>(DataTable dt)
         {
             var columnNames = dt.Columns.Cast<DataColumn>()
@@ -39,12 +39,26 @@ namespace performORM.Entity
                 i.SetValue(this, method.Invoke(this, new object[] { db.tablogetir("select * from " + i.Name) }));
             }
         }
+        public void SaveChanges()
+        {
+            foreach (var i in typeof(T).GetProperties())
+            {
+               dynamic r = i.GetValue(this);
+               foreach (var w in r)
+               {
+                   foreach (var wq in w.GetType().GetProperties())
+                   {
+                       object dsf = wq.GetValue(w);
+                   }
+               }
+            }
+        }
         void InitDB()
         {
-            db = new Database();
-            db.DbType = Database.DbType.SQLite;
-            db.Connectionstring = "Data Source=sqlitedatabase.db" + ";Version=3;";
-            db.Open();
+            db = new veritabanı();
+            db.DbType = veritabanı.eDbType.SQLite;
+            db.Connectionstring = "Data Source=dbwebrone.db" + ";Version=3;";
+            db.Baglan();
         }
     }
 }
