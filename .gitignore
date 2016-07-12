@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Reflection;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Tables entity = new Tables();
+        }
+    }
+    public class sayfa
+    {
+        public int ID { get; set; }
+        public string name { get; set; }
+    }
+    public class kategori
+    {
+        public int ID { get; set; }
+        public string name { get; set; }
+    }
+    public class product
+    {
+        public int ID { get; set; }
+        public string name { get; set; }
+        public string image { get; set; }
+        public int price { get; set; }
+    }
+    public class Tables : Entity<Tables>
+    {
+        public List<sayfa> pages { get; set; }
+        public List<kategori> categories { get; set; }
+        public List<product> products { get; set; }
+    }
+}
