@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using veritabanıdll;
+using Database; // This is my custom database dll for sqlite helper
 using System.Data;
 using System.Reflection;
 
